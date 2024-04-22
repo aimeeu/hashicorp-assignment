@@ -77,8 +77,6 @@ This example shows you how to use push, pull, and fetch when working on a shared
            Automatic merge failed; fix conflicts and then commit the result.
            ```
 
-    Both options produce the same the same result, so choose 
-
 6. Push your changes to the remote repository.
 
    ```bash
