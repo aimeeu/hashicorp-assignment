@@ -1,7 +1,92 @@
 ## What is the difference between push, pull, and fetch?
 
-- `git push` - send changes from a local branch to a remote repo
-- `git fetch` - get changes from a remote repo into your tracking branch
-- `git pull` - get changes from a remote branch into your tracking branch and merge them into a local branch
+- `git push` pushes changes from your tracking branch to its remote branch.
+- `git pull` gets changes from the remote repo and merges them into your tracking branch.
+- `git fetch` gets changes from the remote repo but doesn't merge them into your tracking branch.
 
-Git users often describe `git push` and `git pull` as equivalent. This isn't entirely correct, since `git pull` does two things. `git push` takes your current branch and checks to see whether or not there is a tracking branch for a remote repository connected to it. If so, Git takes changes from the tracking branch and pushes to the remote branch. This is how you share code with a remote repository. You can think of it as "make the remote branch resemble my local branch". This fails if the remote branch has diverged from your local branch; in other words, if not all the commits in the remote branch are in your local branch. When this happens, you need to synchronize your local branch with the remote branch by using `git pull`, `git fetch`, and `git merge`. `git fetch` again takes your current branch and checks to see if there is a tracking branch. If so, `git fetch` looks for changes in the remote branch and pulls them into the tracking branch without changing the tracking branch. To do that, you need to do `git merge origin/master` (for the "master" branch) to merge those changes into your branch - probably also called "master". `git pull` does a `git fetch` followed immediately by `git merge`. This is often what people desire to do, but some people prefer to use `git fetch` followed by `git merge` to make sure they understand the changes they are merging into their tracking branch before the merge happens.
+Git users often describe `git fetch` and `git pull` as equivalent, but they aren't. Both fetch remote changes, but `git pull` automatically merges those changes into your tracking branch.
+
+## How to use push, pull, and fetch
+
+Use push, pull, and fetch when you want to share code with a remote repository. You can think of it as "make the remote branch resemble my local branch".
+
+This example shows you how to use push, pull, and fetch when working on a shared branch called `shared-branch`.
+
+1. Use pull to get the latest updates from the repository.
+
+   ```bash
+   git pull
+   ```
+
+2. Check out the branch.
+
+   ```bash
+   git checkout shared-branch
+   ```
+
+3. Change some code.
+4. Commit your changes to your tracking branch.
+
+   ```bash
+   git commit -a
+   ```
+
+5. Check for updates to the remote branch before you push your changes.
+
+   If there are conflicts between your tracking branch and the remote branch, your push fails. So incorporate remote updates before you push.
+
+   You have two options:
+
+     - `git pull`
+
+        Be aware that `git pull` automatically updates your tracking branch files.
+
+        ```bash
+        git pull
+        ```
+
+        If there is a conflict, output is similar to:
+
+        ```bash
+        CONFLICT (content): Merge conflict in README.md
+        Automatic merge failed; fix conflicts and then commit the result.
+        ```
+
+        Fix the conflicts and then commit your changes.
+
+     - `git fetch` plus `git merge`
+
+        This is the safer option because `git fetch` doesn't automatically update your tracking branch files. You must run `git merge` to merge the remote changes into your tracking branch.
+
+        1. Fetch the remote branch.
+
+           ```bash
+           git fetch
+           ```
+
+        2. Merge remote updates into your tracking branch.
+
+           ```bash
+           git merge origin/shared-branch
+           ```
+
+           If there is a conflict, output is similar to:
+
+           ```bash
+           CONFLICT (content): Merge conflict in README.md
+           Automatic merge failed; fix conflicts and then commit the result.
+           ```
+
+    Both options produce the same the same result, so choose 
+
+6. Push your changes to the remote repository.
+
+   ```bash
+   git push origin shared-branch
+   ```
+
+## Related content
+
+- `git push` [command reference](https://git-scm.com/docs/git-push)
+- `git pull` [command reference](https://git-scm.com/docs/git-pull)
+- `git fetch` [command reference](https://git-scm.com/docs/git-fetch)
