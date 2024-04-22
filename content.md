@@ -87,6 +87,9 @@ This example shows you how to use push, pull, and fetch when working on a shared
 
 ## Related content
 
-- `git push` [command reference](https://git-scm.com/docs/git-push)
-- `git pull` [command reference](https://git-scm.com/docs/git-pull)
-- `git fetch` [command reference](https://git-scm.com/docs/git-fetch)
+- [Pro Git online book](https://git-scm.com/book/en/v2)
+- Command references:
+
+  - [git push](https://git-scm.com/docs/git-push)
+  - [git pull](https://git-scm.com/docs/git-pull)
+  - [git fetch](https://git-scm.com/docs/git-fetch)
